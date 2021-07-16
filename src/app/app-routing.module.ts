@@ -4,13 +4,13 @@ import { MaskDetectorComponent } from './mask-detector/mask-detector.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { FaceRecognitionComponent } from './face-recognition/face-recognition.component';
-import { TrainingModuleComponent } from './training-module/training-module.component';
+import { TrainingComponent } from './training/training.component';
 
 const routes: Routes = [
 {path: '', component: MainpageComponent},
 {path:'maskDetection', component: MaskDetectorComponent},
 {path: 'faceRecognition', component: FaceRecognitionComponent},
-{path: 'trainingModule', component: TrainingModuleComponent},
+{path: 'training', component: TrainingComponent},
 {path: '**', component: NotfoundComponent}
 ];
 
@@ -19,8 +19,8 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [MainpageComponent, 
-                                  MaskDetectorComponent, 
-                                  FaceRecognitionComponent, 
-                                  TrainingModuleComponent, 
+export const routingComponents = [MainpageComponent,
+                                  MaskDetectorComponent,
+                                  FaceRecognitionComponent,
+                                  TrainingComponent,
                                   NotfoundComponent]
