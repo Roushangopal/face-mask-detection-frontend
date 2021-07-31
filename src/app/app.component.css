@@ -39,14 +39,14 @@
     font-style: italic;
 }
 
-footer{
+.footer{
     background-color: rgb(5, 4, 4);
     text-align: right;
     color: white;
     padding: 3px;
     margin: 0px;
 }
-footer p{
+.footer p{
     margin-right: 10px;
     font-size: larger;
 }
