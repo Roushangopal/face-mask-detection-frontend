@@ -29,4 +29,17 @@ router.post("/people", (req, res, next) => {
   });
 });
 
+router.get("/maskDetection", (req, res, next) => {
+  spawn.exec('detect_mask_video.exe', {cwd: '../model/dist/detect_mask_video/'}, (err, stdout, stderr) => {
+    if (err) {
+      console.log(`error: ${err.message}`)
+      return
+    }
+    if (stderr) {
+      console.log(`error: ${stderr}`)
+    }
+    res.send(`stdout: ${stdout}`)
+  })
+});
+
 module.exports = router;
