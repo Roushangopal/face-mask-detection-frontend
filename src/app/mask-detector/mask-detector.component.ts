@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WithoutMaskService } from '../without-mask.service';
 
 @Component({
   selector: 'mask-detector',
@@ -7,11 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaskDetectorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private maskDetection: WithoutMaskService) { }
 
   ngOnInit(): void {
   }
   startMaskDetection(){
-
+    this.maskDetection.startMaskDetector();
   }
 }

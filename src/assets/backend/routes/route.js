@@ -40,6 +40,7 @@ router.post("/people", (req, res, next) => {
 
 //to run the maskdetection system
 router.get("/maskDetection", (req, res, next) => {
+  console.log("Starting Mask Detection System")
   spawn.exec('detect_mask_video.exe', { cwd: 'model/dist/detect_mask_video/' }, (err, stdout, stderr) => {
     if (err) {
       console.log(`error: ${err.message}`)
