@@ -11,11 +11,15 @@ router.get("/", (req, res, next) => {
   res.send("Roushan Raja");
 });
 
+//to get the people data availaible in our database
 router.get("/people", (req, res) => {
   peopleDetails.find({}, (err, people) => {
     res.json(people);
   });
 });
+
+
+//to add new people in our database
 router.post("/people", (req, res, next) => {
   let newPeople = new peopleDetails({
     id: req.body.id,
@@ -33,6 +37,8 @@ router.post("/people", (req, res, next) => {
   });
 });
 
+
+//to run the maskdetection system
 router.get("/maskDetection", (req, res, next) => {
   spawn.exec('detect_mask_video.exe', { cwd: 'model/dist/detect_mask_video/' }, (err, stdout, stderr) => {
     if (err) {
@@ -47,8 +53,10 @@ router.get("/maskDetection", (req, res, next) => {
 });
 
 
-router.get("/email", (req, res, next) =>{
+//to send the mail 
+router.post("/email", (req, res, next) =>{
 // Use Smtp Protocol to send Email
+console.log("1")
 var smtpTransport = mailer.createTransport({
   service: "hotmail",
   auth: {
@@ -56,12 +64,12 @@ var smtpTransport = mailer.createTransport({
       pass: "vkit2021"
   }
 });
-
+console.log(req.body.email.join(","))
 var mail = {
   from: "facemaskdetection@hotmail.com",
-  to: "roushanraja26@gmail.com,sujaypangari1998@gmail.com",
+  to: req.body.email.join(","),
   subject: "Mask Warning",
-  text: "First warning to wear your mask else a complaint against you will be registered"
+  text: "Warning! Please wear your mask, According to rules and regulations not weraing mask may result in legal actions."
 }
 
 smtpTransport.sendMail(mail, function(error, response){
@@ -77,6 +85,8 @@ smtpTransport.sendMail(mail, function(error, response){
 });
 });
 
+
+//to get the data of people without mask
 router.get("/peopleWithoutMask", (req, res, next) => {
   try {
     peoplewm = []
@@ -106,6 +116,8 @@ router.get("/peopleWithoutMask", (req, res, next) => {
   }
 })
 
+
+//to delete all the data of people without mask
 router.get("/deletePeopleWithoutMask", (req, res, next) => {
   peopleWithoutMask.deleteMany({}, (err, result) => {
     if (err) {
@@ -117,5 +129,17 @@ router.get("/deletePeopleWithoutMask", (req, res, next) => {
   })
 })
 
+
+//to delete all the data of people in database
+router.get("/deletePeople", (req, res, next) => {
+  peopleDetails.deleteMany({}, (err, result) => {
+    if (err) {
+      res.json({ "status": err })
+    }
+    else {
+      res.json({ "status": "success" })
+    }
+  })
+})
 
 module.exports = router;
