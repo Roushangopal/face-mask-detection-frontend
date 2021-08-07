@@ -1,1 +1,32 @@
-<p>face-recognition works!</p>
+<div class="heading"></div>
+<div class="container-table100">
+  <div class="wrap-table100">
+    <div class="table100">
+      <table>
+        <thead>
+          <tr class="table100-head">
+            <th class="column0"></th>
+            <th class="column1">USN</th>
+            <th class="column2">Name</th>
+            <th class="column3">E-mail</th>
+            <th class="column4">Phone No.</th>
+            <th class="column5">Operation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of usn; index as i">
+            <td><input type="checkbox" /></td>
+            <td>{{item | uppercase}}</td>
+            <td>{{name[i] | titlecase}}</td>
+            <td>{{email[i]}}</td>
+            <td>{{phone[i]}}</td>
+            <td><a href="#"> Send </a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div id="outer">
+  <div><button type="submit">SEND ALL</button></div>
+</div>

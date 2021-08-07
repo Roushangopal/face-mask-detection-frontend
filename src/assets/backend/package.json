@@ -9,6 +9,7 @@
   "author": "Roushan",
   "license": "ISC",
   "dependencies": {
+    "middleware": "^1.0.0",
     "mongoose": "^5.13.3",
     "nodemon": "^2.0.12",
     "request": "^2.88.2"

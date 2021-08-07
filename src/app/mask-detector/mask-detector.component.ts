@@ -11,5 +11,7 @@ export class MaskDetectorComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  startMaskDetection(){
 
+  }
 }
