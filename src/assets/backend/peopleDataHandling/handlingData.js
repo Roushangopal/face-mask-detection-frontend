@@ -1,6 +1,9 @@
 const peopledbDetails = require("../models/peopledb");
 const request = require("request");
 var fs = require("fs");
+const express = require("express");
+const peopleDetails = require("../models/people");
+var mailer = require('nodemailer');
 
 try {
   fs.readFile("people.csv", (err, data) => {
@@ -49,3 +52,4 @@ try {
 catch(error){
   console.log("error")
 }
+
