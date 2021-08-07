@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyparser = require('body-parser');
+const peopleData = require('./peopleDataHandling/handlingData');
 
 mongoose.connect('mongodb://localhost:27017/people', {useNewUrlParser : true, useUnifiedTopology: true });
 
