@@ -4,9 +4,10 @@ var fs = require("fs");
 const express = require("express");
 const peopleDetails = require("../models/people");
 var mailer = require('nodemailer');
+// var file = require('../../../../../faceRecognition/Withoutmask.csv')
 
 try {
-  fs.readFile("people.csv", (err, data) => {
+  fs.readFile("../../../../dist/detect_mask_video/faceRecognition/Withoutmask.csv", (err, data) => {
     if (err) {
       console.log(err);
     } else {
@@ -42,6 +43,14 @@ try {
           }
           else {
             console.log("success entering into peopledb")
+            fs.writeFile("../../../../faceRecognition/Withoutmask.csv","1vk17cs000,00:00:00", (err, data) => {
+              if(err){
+                console.log(err)
+              }
+              else{
+
+              }
+            })
           }
         })
       });

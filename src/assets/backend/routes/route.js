@@ -41,7 +41,7 @@ router.post("/people", (req, res, next) => {
 //to run the maskdetection system
 router.get("/maskDetection", (req, res, next) => {
   console.log("Starting Mask Detection System")
-  spawn.exec('detect_mask_video.exe', { cwd: 'model/dist/detect_mask_video/' }, (err, stdout, stderr) => {
+  spawn.exec('detect_mask_video.exe', { cwd: '../../../../dist/detect_mask_video/' }, (err, stdout, stderr) => {
     if (err) {
       console.log(`error: ${err.message}`)
       return
@@ -55,35 +55,38 @@ router.get("/maskDetection", (req, res, next) => {
 
 
 //to send the mail 
-router.post("/email", (req, res, next) =>{
-// Use Smtp Protocol to send Email
-console.log("1")
-var smtpTransport = mailer.createTransport({
-  service: "hotmail",
-  auth: {
-      user: "facemaskdetection@hotmail.com",
-      pass: "vkit2021"
-  }
-});
-console.log(req.body.email.join(","))
-var mail = {
-  from: "facemaskdetection@hotmail.com",
-  to: req.body.email.join(","),
-  subject: "Mask Warning",
-  text: "Warning! Please wear your mask, According to rules and regulations not weraing mask may result in legal actions."
-}
+router.post("/email", (req, res, next) => {
+  // Use Smtp Protocol to send Email
+  try {
+    var smtpTransport = mailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "facemaskdetection@hotmail.com",
+        pass: "vkit2021"
+      }
+    });
+    var mail = {
+      from: "facemaskdetection@hotmail.com",
+      to: req.body.email.join(","),
+      subject: "Mask Warning",
+      text: "Warning! Please wear your mask, According to rules and regulations not weraing mask may result in legal actions."
+    }
 
-smtpTransport.sendMail(mail, function(error, response){
-  if(error){
-      console.log(error);
-      res.json({"Status": "Email Not Sent", "Error": error})
-  }else{
-      console.log("Email sent: " + response.message);
-      res.json({"Status": "Email Sent", "Msg": response.message})
-  }
+    smtpTransport.sendMail(mail, function (error, response) {
+      if (error) {
+        console.log(error);
+        res.json({ "Status": "Email Not Sent", "Error": error })
+      } else {
+        console.log("Email sent: " + response.message);
+        res.json({ "Status": "Email Sent", "Msg": response.message })
+      }
 
-  smtpTransport.close();
-});
+      smtpTransport.close();
+    });
+  }
+  catch (err) {
+    console.log("Error")
+  }
 });
 
 
@@ -99,7 +102,7 @@ router.get("/peopleWithoutMask", (req, res, next) => {
         peopleId = JSON.parse(JSON.stringify(result))
         result.forEach((element, index, array) => {
           // console.log(element.id)
-          peopleDetails.find({ id: element.id }, (err, people) => {
+          peopleDetails.find({ id: (element.id).toLowerCase() }, (err, people) => {
             people.forEach((element1) => {
               // console.log(element1.id)
               let people1 = { "id": element1.id, "name": element1.name, "email": element1.email, "mob": element1.mob, "time": element.time };
@@ -112,8 +115,8 @@ router.get("/peopleWithoutMask", (req, res, next) => {
       }
     })
   }
-  finally{
-    setTimeout(()=>{res.json(peoplewm)}, 4000)
+  finally {
+    setTimeout(() => { res.json(peoplewm) }, 4000)
   }
 })
 
