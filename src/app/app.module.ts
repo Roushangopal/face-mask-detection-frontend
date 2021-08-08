@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CommonModule } from '@angular/common';
+import { WithoutMaskService } from './without-mask.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -13,10 +14,10 @@ import { CommonModule } from '@angular/common';
      ],
   imports: [
     BrowserModule,
-    CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [WithoutMaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

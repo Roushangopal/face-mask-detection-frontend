@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { WithoutMaskService } from '../without-mask.service';
+import { peopleWithoutMask } from '../peopleWithoutMask';
 
 @Component({
   selector: 'app-face-recognition',
@@ -7,11 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaceRecognitionComponent implements OnInit {
 
-  constructor() { }
-  public usn = ["1vk17cs047", "1vk17cs061", "1vk17cs032"];
-  public name = ['Roushan Raja', 'Sudhanva Pangari', 'Mizan Farooqui'];
-  public email = ['roushanraja0@gmail.com', 'sujaypangari1998@gmail.com', 'mizanfarooqui@gmail.com'];
-  public phone = ['9060289830', '7348975710', '464486866898'];
+  constructor(private withoutMask: WithoutMaskService, private route: ActivatedRoute) { }
+
+
+  public usn: string[] = [];
+  public name: string[] = [];
+  public email: string[] = [];
+  public phone: string[] = [];
+  public time: string[] = [];
+
+  public people: peopleWithoutMask[] = []
+
+
   ngOnInit(): void {
+    this.people = this.route.snapshot.data.faceRecognition;
+    // console.log(this.people)
+    this.people.forEach(element => {
+      this.usn.push(element.id)
+      this.name.push(element.name)
+      this.email.push(element.email)
+      this.phone.push(element.mob)
+      this.time.push(element.time)
+    });
+  }
+
+  sendMail(){
+    this.withoutMask.generateEmail(this.email)
   }
 }
