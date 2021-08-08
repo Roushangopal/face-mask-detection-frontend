@@ -80,7 +80,6 @@ router.post("/email", (req, res, next) => {
         console.log("Email sent: " + response.message);
         res.json({ "Status": "Email Sent", "Msg": response.message })
       }
-
       smtpTransport.close();
     });
   }
