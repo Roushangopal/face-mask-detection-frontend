@@ -47,16 +47,17 @@ router.get("/maskDetection", (req, res, next) => {
 router.get("/email", (req, res, next) =>{
 // Use Smtp Protocol to send Email
 var smtpTransport = mailer.createTransport({
-  service: "hotmail",
+  host: 'smtp.ethereal.email',
+  port: 587,
   auth: {
-      user: "facemaskdetection@hotmail.com",
-      pass: "vkit2021"
+      user: 'facemaskdetection@hotmail.com',
+      pass: 'vkit2021'
   }
 });
 
 var mail = {
   from: "facemaskdetection@hotmail.com",
-  to: "roushanraja26@gmail.com,sujaypangari1998@gmail.com",
+  to: "sudhanvapangari1998@gmail.com",
   subject: "Mask Warning",
   text: "First warning to wear your mask else a complaint against you will be registered"
 }
